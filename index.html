@@ -538,7 +538,17 @@
 <p>​        （2）递归的定义最优解；</p>
 <p>​        （3）以自底向上或自顶向下的记忆化方式（备忘录法）计算出最优值；</p>
 <p>​        （4）根据计算最优值时得到的信息，构造问题的最优解。</p>
-<h4 id="五、经典题目"><a href="#五、经典题目" class="headerlink" title="五、经典题目"></a>五、经典题目</h4>
+<h4 id="五、经典题目"><a href="#五、经典题目" class="headerlink" title="五、经典题目"></a>五、经典题目</h4><p><strong>爬楼梯问题</strong></p>
+<p>题目描述：有 N 阶楼梯，每次可以上一阶或者两阶，求有多少种上楼梯的方法。</p>
+<p>定义一个数组 dp 存储上楼梯的方法数（为了方便讨论，数组下标从 1 开始），dp[i] 表示走到第 i 个楼梯的方法数目。第 i 个楼梯可以从第 i-1 和 i-2 个楼梯再走一步到达，走到第 i 个楼梯的方法数为走到第 i-1 和第 i-2 个楼梯的方法数之和。状态转移方程为：</p>
+<p>​                        dp[i]=dp[i-1]+dp[i-2]</p>
+<p>public static int climbStair(int n){<br>​        if(n &lt;= 2){<br>​            return n;<br>​        }<br>​        int stair1 = 1, stair2 = 2;<br>​        int cur = 0;<br>​        for(int i = 3; i &lt;= n; i++){<br>​            cur = stair1 + stair2;<br>​            stair1 = stair2;<br>​            stair2 = cur;<br>​        }<br>​        return cur;<br>​    }</p>
+<p><strong>强盗抢劫问题</strong></p>
+<p>问题描述：抢劫一排住户，但是不能抢邻近的住户，求最大抢劫量。</p>
+<p>如果输入为空，返回0；如果输入个数为1，返回这个数；如果说如个数为2，返回最大值。输入个数大于等于3，就需要运用动态规划。状态转移方程为：</p>
+<p>​                                dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])</p>
+<p>public static int solution(int[] nums){<br>​        if(nums.length &lt;= 0){<br>​            return 0;<br>​        }<br>​        if(nums.length == 1){<br>​            return nums[0];<br>​        }<br>​        if(nums.length == 2){<br>​            return nums[0] &gt;= nums[1] ? nums[0] : nums[1];<br>​        }<br>​        int pre1 = 0,pre2 = 0;//pre1为dp[i-1]<br>​        int max = 0;<br>​        for(int i = 0; i &lt; nums.length; i++){<br>​            max = Math.max(nums[i] + pre2, pre1);<br>​            System.out.println(max);<br>​            pre2 = pre1;<br>​            pre1 = max;<br>​        }<br>​        return max;<br>​    }</p>
+
           
         
       
