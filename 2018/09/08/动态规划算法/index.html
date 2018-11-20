@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="小呀嘛小二郎啊">
 <meta property="og:description" content="一、基本概念​    动态规划过程是：每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中生产出来的，所以，这样的多阶层最优化决策解决这个问题的过程就称为动态规划。 二、动态规划算法的基本思想​    只要问题可以划分成规模更小的子问题，并且原问题的最优解中包含了子问题的最优解，则可以考虑用动态规划解决。动态规划的实质是分治思想和解决冗余，因此，动态规划是一种将问题实例分解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-19T03:27:39.074Z">
+<meta property="og:updated_time" content="2018-11-20T09:22:50.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划算法">
 <meta name="twitter:description" content="一、基本概念​    动态规划过程是：每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中生产出来的，所以，这样的多阶层最优化决策解决这个问题的过程就称为动态规划。 二、动态规划算法的基本思想​    只要问题可以划分成规模更小的子问题，并且原问题的最优解中包含了子问题的最优解，则可以考虑用动态规划解决。动态规划的实质是分治思想和解决冗余，因此，动态规划是一种将问题实例分解">
@@ -386,12 +386,12 @@
 <p>题目描述：有 N 阶楼梯，每次可以上一阶或者两阶，求有多少种上楼梯的方法。</p>
 <p>定义一个数组 dp 存储上楼梯的方法数（为了方便讨论，数组下标从 1 开始），dp[i] 表示走到第 i 个楼梯的方法数目。第 i 个楼梯可以从第 i-1 和 i-2 个楼梯再走一步到达，走到第 i 个楼梯的方法数为走到第 i-1 和第 i-2 个楼梯的方法数之和。状态转移方程为：</p>
 <p>​                        dp[i]=dp[i-1]+dp[i-2]</p>
-<p>public static int climbStair(int n){<br>​        if(n &lt;= 2){<br>​            return n;<br>​        }<br>​        int stair1 = 1, stair2 = 2;<br>​        int cur = 0;<br>​        for(int i = 3; i &lt;= n; i++){<br>​            cur = stair1 + stair2;<br>​            stair1 = stair2;<br>​            stair2 = cur;<br>​        }<br>​        return cur;<br>​    }</p>
+<p>public static int climbStair(int n){<br>​        if(n &lt;= 2){<br>​            return n;<br>​        }<br>​        int stair1 = 1, stair2 = 2;//stair1为dp[i-2]<br>​        int cur = 0;<br>​        for(int i = 3; i &lt;= n; i++){<br>​            cur = stair1 + stair2;<br>​            stair1 = stair2;<br>​            stair2 = cur;<br>​        }<br>​        return cur;<br>​    }</p>
 <p><strong>强盗抢劫问题</strong></p>
 <p>问题描述：抢劫一排住户，但是不能抢邻近的住户，求最大抢劫量。</p>
 <p>如果输入为空，返回0；如果输入个数为1，返回这个数；如果说如个数为2，返回最大值。输入个数大于等于3，就需要运用动态规划。状态转移方程为：</p>
 <p>​                                dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])</p>
-<p>public static int solution(int[] nums){<br>​        if(nums.length &lt;= 0){<br>​            return 0;<br>​        }<br>​        if(nums.length == 1){<br>​            return nums[0];<br>​        }<br>​        if(nums.length == 2){<br>​            return nums[0] &gt;= nums[1] ? nums[0] : nums[1];<br>​        }<br>​        int pre1 = 0,pre2 = 0;//pre1为dp[i-1]<br>​        int max = 0;<br>​        for(int i = 0; i &lt; nums.length; i++){<br>​            max = Math.max(nums[i] + pre2, pre1);<br>​            System.out.println(max);<br>​            pre2 = pre1;<br>​            pre1 = max;<br>​        }<br>​        return max;<br>​    }</p>
+<p>public static int solution(int[] nums){<br>​        if(nums.length &lt;= 0){<br>​            return 0;<br>​        }<br>​        if(nums.length == 1){<br>​            return nums[0];<br>​        }<br>​        if(nums.length == 2){<br>​            return nums[0] &gt;= nums[1] ? nums[0] : nums[1];<br>​        }<br>​        int pre1 = 0,pre2 = 0;//pre1为dp[i-1]<br>​        int max = 0;<br>​        for(int i = 0; i &lt; nums.length; i++){<br>​            max = Math.max(nums[i] + pre2, pre1);<br>​            pre2 = pre1;<br>​            pre1 = max;<br>​        }<br>​        return max;<br>​    }</p>
 
       
     </div>
