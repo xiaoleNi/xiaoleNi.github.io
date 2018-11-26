@@ -262,6 +262,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xiaoleni.github.io/2018/11/26/批量转换Java源代码编码格式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="笑了@">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head-portrait.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小呀嘛小二郎啊">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/26/批量转换Java源代码编码格式/" itemprop="url">批量转换Java源代码编码格式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-26T17:53:42+08:00">
+                2018-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/26/批量转换Java源代码编码格式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/11/26/批量转换Java源代码编码格式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>public class GBKForUTF8 {</p>
+<p>public static final List<string> filePathLists = new ArrayList<string>();</string></string></p>
+<p>/**</p>
+<ul>
+<li></li>
+<li>@param inEncoding   原编码格式</li>
+<li>@param outEncoding  目标编码格式</li>
+<li>@param inFileName   原文件路径</li>
+<li>@param outFileName  目标文件路径</li>
+<li>@throws IOException<br> */<br> public static void changeEncoding(String inEncoding, String outEncoding, String inFileName, String outFileName)<br> ​    throws IOException {<br> File file = new File(outFileName);<br> if(!file.exists()){<br> ​    file.createNewFile();<br> }<br> BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inFileName), inEncoding));<br> BufferedWriter writer = new BufferedWriter(<br> ​        new OutputStreamWriter(new FileOutputStream(outFileName), outEncoding));<br> String line = null;<br> while ((line = reader.readLine()) != null) {<br> ​    writer.write(line, 0, line.length());<br> ​    writer.newLine();<br> }<br> writer.flush();<br> writer.close();<br> reader.close();<br> }</li>
+</ul>
+<p>/**</p>
+<ul>
+<li>@decription 将根目录下所有文件列出</li>
+<li>@param path  原根目录路径<br> */<br> public static void getFilePath(String path) {<br> File file = new File(path);<br> if (file.exists()) {<br> ​    File[] files = file.listFiles();<br> ​    for (int i = 0; i &lt; files.length; i++) {<br> ​        if(files[i].isFile()){<br> ​            filePathLists.add(files[i].getAbsolutePath());<br> ​        }<br> ​        if(files[i].isDirectory()){<br> ​            getFilePath(files[i].getAbsolutePath());<br> ​        }<br> ​    }<br> }<br> }</li>
+</ul>
+<p>/**</p>
+<ul>
+<li>@description 创建目标文件夹下不存在的文件</li>
+<li>@param path   单个文件路径</li>
+<li>@throws IOException<br> */<br> public static void createFile(String path) throws IOException{<br> String[] paths = path.split(“\\“);<br> String str = paths[0];<br> for(int i = 1; i &lt; paths.length; i++){<br> ​    str += “\“ + paths[i];<br> ​    File file = new File(str);<br> ​    if(!file.exists()){<br> ​        if(i == paths.length - 1){<br> ​            file.createNewFile();<br> ​        }else{<br> ​            file.mkdir();<br> ​        }<br> ​    }<br> }<br> }</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+	
+	
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://xiaoleni.github.io/2018/11/14/Web学习/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -795,7 +970,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -806,7 +981,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -817,7 +992,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
