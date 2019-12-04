@@ -365,7 +365,56 @@
       
         
           
-            
+            <h4 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h4><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
+<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
+<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例：</p>
+<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
+<h4 id="二、实现"><a href="#二、实现" class="headerlink" title="二、实现"></a>二、实现</h4><p>public class ListNode {</p>
+<pre><code>public int val;
+public ListNode next;
+public ListNode(int val){
+    this.val = val;
+}
+</code></pre><p>}</p>
+<p>public class AddNumByListNode {</p>
+<pre><code>public static void main(String[] args) {
+    ListNode l1 = new ListNode(2);
+    l1.next = new ListNode(4);
+    l1.next.next = new ListNode(3);
+
+    ListNode l2 = new ListNode(5);
+    l2.next = new ListNode(6);
+    l2.next.next = new ListNode(4);
+
+    ListNode result = addTwoNumbers(l1, l2);
+    System.out.println(result.val);
+
+}
+
+public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode root = new ListNode(0);
+    ListNode cursor = root;
+    int carry = 0;
+    while(l1 != null || l2 != null || carry != 0){
+        int l1Val = l1 != null ? l1.val : 0;
+        int l2Val = l2 != null ? l2.val : 0;
+        int sumVal = l1Val + l2Val + carry;
+        carry = sumVal / 10;
+        ListNode sumNode = new ListNode(sumVal % 10);
+        cursor.next = sumNode;
+        cursor = sumNode;
+        if(l1 != null){
+            l1 = l1.next;
+        }
+        if(l2 != null){
+            l2 = l2.next;
+        }
+    }
+    return root.next;
+}
+</code></pre><p>}</p>
+
           
         
       

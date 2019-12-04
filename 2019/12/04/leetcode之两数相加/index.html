@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="苦逼程序员">
+<meta name="description" content="一、题目给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。 示例： 输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4)输出：7 -&amp;gt; 0 -&amp;g">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode之两数相加">
 <meta property="og:url" content="https://xiaoleni.github.io/2019/12/04/leetcode之两数相加/index.html">
 <meta property="og:site_name" content="小呀嘛小二郎啊">
-<meta property="og:description" content="苦逼程序员">
+<meta property="og:description" content="一、题目给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。 示例： 输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4)输出：7 -&amp;gt; 0 -&amp;g">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-04T08:11:36.301Z">
+<meta property="og:updated_time" content="2019-12-04T08:15:22.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode之两数相加">
-<meta name="twitter:description" content="苦逼程序员">
+<meta name="twitter:description" content="一、题目给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。 示例： 输入：(2 -&amp;gt; 4 -&amp;gt; 3) + (5 -&amp;gt; 6 -&amp;gt; 4)输出：7 -&amp;gt; 0 -&amp;g">
 
 
 
@@ -362,7 +362,56 @@
       
 
       
-        
+        <h4 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h4><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
+<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
+<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例：</p>
+<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
+<h4 id="二、实现"><a href="#二、实现" class="headerlink" title="二、实现"></a>二、实现</h4><p>public class ListNode {</p>
+<pre><code>public int val;
+public ListNode next;
+public ListNode(int val){
+    this.val = val;
+}
+</code></pre><p>}</p>
+<p>public class AddNumByListNode {</p>
+<pre><code>public static void main(String[] args) {
+    ListNode l1 = new ListNode(2);
+    l1.next = new ListNode(4);
+    l1.next.next = new ListNode(3);
+
+    ListNode l2 = new ListNode(5);
+    l2.next = new ListNode(6);
+    l2.next.next = new ListNode(4);
+
+    ListNode result = addTwoNumbers(l1, l2);
+    System.out.println(result.val);
+
+}
+
+public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode root = new ListNode(0);
+    ListNode cursor = root;
+    int carry = 0;
+    while(l1 != null || l2 != null || carry != 0){
+        int l1Val = l1 != null ? l1.val : 0;
+        int l2Val = l2 != null ? l2.val : 0;
+        int sumVal = l1Val + l2Val + carry;
+        carry = sumVal / 10;
+        ListNode sumNode = new ListNode(sumVal % 10);
+        cursor.next = sumNode;
+        cursor = sumNode;
+        if(l1 != null){
+            l1 = l1.next;
+        }
+        if(l2 != null){
+            l2 = l2.next;
+        }
+    }
+    return root.next;
+}
+</code></pre><p>}</p>
+
       
     </div>
     
@@ -482,8 +531,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -557,6 +615,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、题目"><span class="nav-number">1.</span> <span class="nav-text">一、题目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、实现"><span class="nav-number">2.</span> <span class="nav-text">二、实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
